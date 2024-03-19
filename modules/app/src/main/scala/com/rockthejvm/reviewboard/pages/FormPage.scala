@@ -6,7 +6,6 @@ import org.scalajs.dom
 import zio.*
 
 import com.rockthejvm.reviewboard.common.*
-import com.rockthejvm.reviewboard.http.requests.LoginRequest
 import com.raquo.laminar.nodes.ReactiveHtmlElement
 
 trait FormState {

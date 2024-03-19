@@ -8,7 +8,6 @@ import org.scalajs.dom.html.Element
 import zio.*
 
 import com.rockthejvm.reviewboard.common.Constants
-import com.rockthejvm.reviewboard.http.requests.CreateCompanyRequest
 import com.rockthejvm.reviewboard.components.Router
 
 case class CreateCompanyState(
@@ -30,17 +29,6 @@ case class CreateCompanyState(
 
   def maybeSuccess: Option[String] =
     upstreamStatus.flatMap(_.toOption)
-
-  def toRequest: CreateCompanyRequest =
-    CreateCompanyRequest(
-      name,
-      url,
-      location,
-      country,
-      industry,
-      image,
-      Option(tags).filter(_.nonEmpty)
-    )
 }
 
 object CreateCompanyPage extends FormPage[CreateCompanyState]("Post New Company") {

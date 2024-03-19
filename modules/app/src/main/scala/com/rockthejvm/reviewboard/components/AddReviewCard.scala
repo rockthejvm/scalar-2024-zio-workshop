@@ -5,7 +5,6 @@ import org.scalajs.dom
 import zio.*
 
 import com.rockthejvm.reviewboard.domain.data.*
-import com.rockthejvm.reviewboard.http.requests.CreateReviewRequest
 
 class AddReviewCard(companyId: Long, onDisable: () => Unit, triggerBus: EventBus[Unit]) {
 

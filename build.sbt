@@ -52,11 +52,6 @@ val serverDependencies = commonDependencies ++ Seq(
   "com.stripe"             % "stripe-java"                       % stripeVersion
 )
 
-lazy val foundations = (project in file("modules/foundations"))
-  .settings(
-    libraryDependencies ++= serverDependencies
-  )
-
 lazy val common = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("modules/common"))

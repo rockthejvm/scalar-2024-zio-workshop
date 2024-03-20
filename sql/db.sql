@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS companies (
     country TEXT,
     industry TEXT,
     image TEXT,
-    tags TEXT[],
+    tags TEXT[]
 );
 
 CREATE TABLE IF NOT EXISTS reviews

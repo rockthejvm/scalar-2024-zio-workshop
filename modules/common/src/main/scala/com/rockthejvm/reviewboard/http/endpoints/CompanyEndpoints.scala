@@ -41,4 +41,37 @@ trait CompanyEndpoints extends BaseEndpoint {
       .in("companies" / path[String]("id"))
       .get
       .out(jsonBody[Option[Company]])
+
+  // premium Stripe endpoints
+  // POST /premium
+  val createPremium =
+    baseEndpoint
+      .tag("Companies")
+      .name("create premium")
+      .description("PREMIUM listing of company")
+      .in("premium")
+      .post
+      .in(jsonBody[CreateCompanyRequest])
+      .out(stringBody) // TODO
+
+  val webhookPremium =
+    baseEndpoint
+      .tag("Companies")
+      .name("webhook")
+      .description("The stuff Stripe calls back to me")
+      .in("premium" / "webhook")
+      .post
+      .in(header[String]("Stripe-Signature"))
+      .in(stringBody)
+
+  /*
+    call an endpoint (mine)
+      insert a new company (tentatively) into the database
+      create a Stripe checkout session -> URL
+      return that URL
+    frontend reroutes to that URL (checkout.stripe.com/....)
+    enter CC details & pay
+    Stripe calls another endpoint (mine) = webhook
+      validate the purchase
+   */
 }

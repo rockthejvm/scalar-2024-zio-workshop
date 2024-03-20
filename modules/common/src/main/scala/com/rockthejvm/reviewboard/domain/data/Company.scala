@@ -12,7 +12,8 @@ final case class Company(
     country: Option[String] = None,
     industry: Option[String] = None,
     image: Option[String] = None,
-    tags: List[String] = List()
+    tags: List[String] = List(),
+    active: Boolean = false
 ) derives JsonCodec
 
 object Company {

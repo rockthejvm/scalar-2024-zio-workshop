@@ -51,6 +51,7 @@ object CompaniesPage {
    */
   def apply() =
     sectionTag(
+      // onMountCallback(_ => callBackend(_.companies.getAll(())).emitTo(companiesBus))
       onMountCallback(_ => getCompaniesNaive()),
       cls := "section-1",
       div(

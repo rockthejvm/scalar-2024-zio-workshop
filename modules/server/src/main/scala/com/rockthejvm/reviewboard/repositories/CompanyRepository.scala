@@ -14,6 +14,7 @@ trait CompanyRepository {
   def getBySlug(slug: String): Task[Option[Company]]
   def update(id: Long, op: Company => Company): Task[Company]
   def delete(id: Long): Task[Company]
+  def activate(id: Long): Task[Company]
 }
 
 class CompanyRepositoryLive private (quill: Quill.Postgres[SnakeCase.type])
@@ -79,6 +80,9 @@ class CompanyRepositoryLive private (quill: Quill.Postgres[SnakeCase.type])
         .delete
         .returning(c => c)
     }
+
+  def activate(id: Long): Task[Company] =
+    update(id, _.copy(active = true))
 }
 
 object CompanyRepositoryLive {

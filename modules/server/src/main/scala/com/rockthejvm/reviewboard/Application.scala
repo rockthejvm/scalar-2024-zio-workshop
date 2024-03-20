@@ -31,6 +31,7 @@ object Application extends ZIOAppDefault {
     Repository.dataLayer,
     // services
     CompanyServiceLive.layer,
+    PaymentServiceLive.layer,
     // repositories
     CompanyRepositoryLive.layer
   )

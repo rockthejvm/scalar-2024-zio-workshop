@@ -4,6 +4,7 @@ import zio.*
 
 import com.rockthejvm.reviewboard.http.requests.CreateCompanyRequest
 import com.rockthejvm.reviewboard.domain.data.Company
+import com.rockthejvm.reviewboard.repositories.CompanyRepository
 
 // "business logic"
 trait CompanyService {
@@ -13,17 +14,23 @@ trait CompanyService {
   def getBySlug(slug: String): Task[Option[Company]]
 }
 
-class CompanyServiceLive private extends CompanyService {
+class CompanyServiceLive private (repo: CompanyRepository) extends CompanyService {
   override def create(req: CreateCompanyRequest): Task[Company] =
-    ZIO.succeed(Company.dummy)
+    repo.create(req.toCompany)
   override def getAll: Task[List[Company]] =
-    ZIO.succeed(List(Company.dummy))
+    repo.getAll
   override def getById(id: Long): Task[Option[Company]] =
-    ZIO.succeed(Some(Company.dummy))
+    repo.getById(id)
   override def getBySlug(slug: String): Task[Option[Company]] =
-    ZIO.succeed(Some(Company.dummy))
+    repo.getBySlug(slug)
 }
 
 object CompanyServiceLive {
-  val layer = ZLayer.succeed(new CompanyServiceLive)
+  val layer: ZLayer[CompanyRepository, Nothing, CompanyService] =
+    ZLayer.fromFunction(repo => new CompanyServiceLive(repo))
+
+  // same as
+  // ZLayer {
+  //   ZIO.service[CompanyRepository].map(repo => new CompanyServiceLive(repo))
+  // }
 }

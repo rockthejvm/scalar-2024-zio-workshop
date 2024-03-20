@@ -4,8 +4,9 @@ import zio.*
 import sttp.tapir.server.ziohttp.*
 import zio.http.Server
 
-import com.rockthejvm.reviewboard.http.controllers.CompanyController
-import com.rockthejvm.reviewboard.services.CompanyServiceLive
+import com.rockthejvm.reviewboard.http.controllers.*
+import com.rockthejvm.reviewboard.services.*
+import com.rockthejvm.reviewboard.repositories.*
 
 object Application extends ZIOAppDefault {
 
@@ -27,7 +28,10 @@ object Application extends ZIOAppDefault {
   override def run = program.provide(
     // infra
     Server.default,
+    Repository.dataLayer,
     // services
-    CompanyServiceLive.layer
+    CompanyServiceLive.layer,
+    // repositories
+    CompanyRepositoryLive.layer
   )
 }

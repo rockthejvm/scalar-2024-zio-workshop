@@ -14,7 +14,7 @@ object Router {
       onMountCallback(ctx =>
         externalUrlBus.events.foreach(url => dom.window.location.href = url)(ctx.owner)
       ),
-      routes(
+      routes( // div(things <-- pathEvents)
         div(
           cls := "container-fluid",
           (pathEnd | path("companies")) {

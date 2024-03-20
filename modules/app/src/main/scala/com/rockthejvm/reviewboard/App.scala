@@ -20,7 +20,7 @@ object App {
     val containerNode = dom.document.querySelector("#app")
     render(
       containerNode,
-      Tutorial()
+      app
     )
   }
 }
